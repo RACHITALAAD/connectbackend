@@ -1,9 +1,8 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const db = require('../config/db');
+const db = require("../config/db");
 
-
-//http://localhost:5000/api/applicationReview/applicants/13
+//https://connecthivebackend.onrender.com/api/applicationReview/applicants/13
 
 router.get("/applicants/:userId", (req, res) => {
   const { userId } = req.params;
@@ -22,13 +21,12 @@ router.get("/applicants/:userId", (req, res) => {
   `;
 
   db.query(sql, [userId], (err, result) => {
-      if (err) {
-          console.error("Database error:", err);
-          return res.status(500).json({ error: "Failed to retrieve applicants" });
-      }
-      res.json(result);
+    if (err) {
+      console.error("Database error:", err);
+      return res.status(500).json({ error: "Failed to retrieve applicants" });
+    }
+    res.json(result);
   });
 });
-
 
 module.exports = router;
